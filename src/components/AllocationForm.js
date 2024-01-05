@@ -10,11 +10,16 @@ const AllocationForm = (props) => {
 
     const submitEvent = () => {
 
-            if(cost > remaining) {
-                alert("The value cannot exceed remaining funds  £"+remaining);
-                setCost("");
-                return;
-            }
+        if(!/[0-9]/.test(cost)){
+            alert("Please enter numbers only.");
+            setCost("");
+            return;
+        }
+        else if(cost > remaining) {
+            alert("The value cannot exceed remaining funds  £"+remaining);
+            setCost("");
+            return;
+        }
 
         const expense = {
             name: name,
