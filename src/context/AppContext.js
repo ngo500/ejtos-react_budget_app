@@ -50,13 +50,19 @@ export const AppReducer = (state, action) => {
                     return previousExp + currentExp.cost
                 },0
             );
-            total_budget2 = total_budget2 + action.payload.cost;
+            total_budget2 = total_budget2 - action.payload.cost;
             action.type = "DONE";
             if(total_budget2 >= 0) {
                 total_budget2 = 0;
                 state.expenses.map((currentExp)=> {
-                    if(currentExp.name === action.payload.name && currentExp.cost > 0) {
-                        currentExp.cost = action.payload.cost + currentExp.cost;
+                    if(currentExp.name === action.payload.name && currentExp.cost - action.payload.cost >= 0) {
+                        currentExp.cost = currentExp.cost - action.payload.cost;
+                    }
+                    else if(currentExp.name === action.payload.name && currentExp.cost - action.payload.cost < 0){
+                        alert("Cannot decrease any further than current funds!");
+                        return {
+                            ...state
+                        }
                     }
                     if(currentExp.name === action.payload.name && currentExp <= 0) {
                         currentExp.cost = 0;
@@ -90,10 +96,10 @@ export const AppReducer = (state, action) => {
         case 'SET_BUDGET':
             action.type = "DONE";
             state.budget = action.payload;
-
             return {
-                ...state,
-            };
+                ...state
+            }
+
         case 'CHG_CURRENCY':
             action.type = "DONE";
             state.currency = action.payload;

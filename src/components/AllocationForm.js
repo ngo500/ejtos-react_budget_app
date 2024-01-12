@@ -27,7 +27,7 @@ const AllocationForm = (props) => {
         };
         if(action === "Reduce") {
             dispatch({
-                type: 'RED_EXPENSE',
+                type: 'REMOVE_EXPENSE',
                 payload: expense,
             });
         } else {
