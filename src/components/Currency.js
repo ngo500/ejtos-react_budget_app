@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { AppContext } from '../context/AppContext';
+
 const Currency = () => {
-    const { dispatch } = useContext(AppContext);
+    const { dispatch, currency } = useContext(AppContext);
     const [newCurrency, setNewCurrency] = useState('');
     
     const submitEvent = (event) => {
@@ -14,7 +15,7 @@ const Currency = () => {
 
     return (
         <div className='alert alert-success'>
-            <select className="custom-select" id="inputGroupSelect01" value={newCurrency} onChange={submitEvent}>
+            <select className="custom-select" id="inputGroupSelect01" value={currency} onChange={submitEvent}>
                         <option defaultValue>Currency</option>
                         <option value="£" name="Pound">£ Pound</option>
                         <option value="$" name="Dollar">$ Dollar</option>
